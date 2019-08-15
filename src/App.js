@@ -1,11 +1,17 @@
 import  React, { Component } from 'react';
 import './App.css';
+import PrimarySearchAppBar from './components/PrimarySearchAppBar'
+import PostCard from './components/PostCard'
+// import NestedGrid from './components/NestedGrid'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello React</h1>
+        <PrimarySearchAppBar/>
+        <PostCard/>
+        <PostCard/>
+        <PostCard/>
       </div>
     );
   }
