@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CommentList from './CommentList'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -15,8 +14,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import CommentIcon from '@material-ui/icons/Comment'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
 import Input from '@material-ui/core/Input';
+import{withStyles} from '@material-ui/core/styles'
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   card: {
     maxWidth: 512,
     marginLeft: 'auto',
@@ -44,59 +44,48 @@ const useStyles = makeStyles(theme => ({
     width: '90%',
     margin: theme.spacing(1),
   },
-}));
+});
 
-export default function PostCard() {
-  const classes = useStyles();
-  const datas = [
-    {
-      nickname: '민경환',
-      contents: '첫번째 댓글',
-    },
-    {
-      nickname: '박동현',
-      contents: '두번째 댓글',
-    },
-  ]
-
-  return (
-    <Card className={classes.card}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            <img src="https://placeimg.com/64/64/2" alt="posting img"></img>
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreHoriz />
+class PostCard extends React.Component{
+  render(){
+    const {classes} = this.props;
+    return(
+      <Card className={classes.card}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              <img src= "https://placing.com/512/512/any"  alt="posting img"></img>
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreHoriz />
+            </IconButton>
+          }
+          title={this.props.contents}
+          subheader="어딘가"
+        />
+        <CardMedia
+          className={classes.media}
+          image={this.props.imageUrl}
+          title="Paella dish"
+        />
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
           </IconButton>
-        }
-        title="게시글 제목"
-        subheader="어딘가"
-      />
-      <CardMedia
-        className={classes.media}
-        image="https://placeimg.com/512/512/any"
-        title="Paella dish"
-      />
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="comment">
-          <CommentIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton aria-label="comment">
-          <BookmarkIcon/>
-        </IconButton>
-
-      </CardActions>
-        <CardContent>
-          <CommentList data={datas}/>
+          <IconButton aria-label="comment">
+            <CommentIcon />
+          </IconButton>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+          <IconButton aria-label="comment">
+            <BookmarkIcon/>
+          </IconButton>
+        </CardActions>
+        <CardContent  data = {this.props.contents}>
+          <CommentList/>
           <Input
             placeholder="댓글 달기..."
             className={classes.input}
@@ -106,5 +95,8 @@ export default function PostCard() {
           />
         </CardContent>
     </Card>
-  );
+    );
+  }
 }
+
+export default withStyles(styles)(PostCard);
