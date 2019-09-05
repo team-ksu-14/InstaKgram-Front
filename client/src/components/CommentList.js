@@ -7,8 +7,8 @@ class CommentList extends Component {
   render() {
     return (
       <div>
-        {this.props.data != null ? 
-          this.props.data.map((comment) => {
+        {this.props.contents != null ? 
+          this.props.contents.map((comment) => {
             return <List><ListItem><b>{comment.nickname}</b>{comment.contents}</ListItem></List>
           })
         : null}
