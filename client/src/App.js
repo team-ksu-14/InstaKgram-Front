@@ -1,6 +1,6 @@
 import  React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import Toolbar, { styles as toolbarStyles } from './components/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
@@ -15,10 +15,7 @@ import Explore from './pages/Explore'
 import User from './pages/User'
 // import NestedGrid from './components/NestedGrid'
 
-const styles = theme =>({
-  progress: {
-    margin : theme.spacing.unit *2
-  },
+const styles = (theme) =>({
   grow: {
     flexGrow: 1,
   },
@@ -30,6 +27,10 @@ const styles = theme =>({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+  },
+  placeholder: toolbarStyles(theme).root,
+  toolbar: {
+    justifyContent: 'space-between',
   },
   search: {
     position: 'relative',
@@ -108,10 +109,10 @@ class App extends Component {
   render() {
     const{ classes } = this.props;
     return (
-      <div className="App">
-        <div className = {classes.grow}>
-          <AppBar position="static" color="white">
-            <Toolbar>
+      <div className="App" >
+        <div className = {classes.grow} >
+          <AppBar position="fixed" color="white">
+            <Toolbar className={classes.toolbar}>
               <IconButton
                 edge="start"
                 className={classes.menuButton}
@@ -171,6 +172,7 @@ class App extends Component {
               </div>
             </Toolbar>
           </AppBar>
+          <div className={classes.placeholder} />
         </div>
         {
           (() => {

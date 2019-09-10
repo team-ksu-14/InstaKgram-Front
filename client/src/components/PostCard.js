@@ -54,7 +54,7 @@ class PostCard extends React.Component{
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
-              <img src= "https://placing.com/512/512/any"  alt="posting img"></img>
+              <img src= "https://placeimg.com/512/512/any"  alt="posting img"></img>
             </Avatar>
           }
           action={

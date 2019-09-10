@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { withStyles } from '@material-ui/core/styles';
 
 
-const styles = theme =>({
+const styles = (theme) =>({
     progress: {
       margin : theme.spacing.unit *2
     },
@@ -42,7 +42,7 @@ class Home extends Component{
                 this.state.posts ? this.state.posts.map(c => {
                   return(
                     <PostCard
-                     idx = {c.idx}
+                     key = {c.idx}
                      contents = {c.contents}
                      imageUrl = {c.imageUrl}
                      member = {c.member}/>
