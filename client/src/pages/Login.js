@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Login extends Component{
-    render(){
-        return(
-            <div>
-                Login
-            </div>
-        );
-    }
+const Login = ({history}) =>{
+    return (
+        <div>
+            Login Page
+            <button onClick ={() => {history.push('/main')}}>
+                gohome
+            </button>
+        </div>
+    )
 }
 
 export default Login;
