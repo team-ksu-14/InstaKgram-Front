@@ -10,7 +10,6 @@ const styles = (theme) =>({
     },
 });
 class Home extends Component{
-
     state = {
         posts: "",
         completed: 0
