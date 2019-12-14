@@ -1,7 +1,8 @@
 import React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from '@material-ui/core/Typography';
 import AppForm from '../components/Form/AppForm';
 import { email, required } from '../components/Form/Validation';
@@ -22,64 +23,84 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function SignUp() {
+  const classes = useStyles();
+  const [sent, setSent] = React.useState(false);
 
-const Login = ({history}) =>{
-    const classes = useStyles();
-    const [sent, setSent] = React.useState(false);
+  const validate = values => {
+    const errors = required(['firstName', 'lastName', 'email', 'password'], values);
 
-    const validate = values => {
-      const errors = required(['email', 'password'], values);
-
-      if (!errors.email) {
-        const emailError = email(values.email, values);
-        if (emailError) {
-          errors.email = email(values.email, values);
-        }
+    if (!errors.email) {
+      const emailError = email(values.email, values);
+      if (emailError) {
+        errors.email = email(values.email, values);
       }
+    }
 
-      return errors;
-    };
+    return errors;
+  };
 
-    const handleSubmit = () => {
-      setSent(true);
-    };
-    return (
-      <React.Fragment>
-        <AppForm>
+  const handleSubmit = () => {
+    setSent(true);
+  };
+
+  return (
+    <React.Fragment>
+      <AppForm>
         <React.Fragment>
           <Typography variant="h4" gutterBottom marked="center" align="center">
             InstaKgram
           </Typography>
           <Typography variant="body2" align="center">
-            {/* <Link href="/premium-themes/onepirate/sign-up/" align="center" underline="always">
-              Sign Up here
-            </Link> */}
+            <Link href="/premium-themes/onepirate/sign-in/" underline="always">
+              Already have an account?
+            </Link>
           </Typography>
         </React.Fragment>
         <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
           {({ handleSubmit2, submitting }) => (
             <form onSubmit={handleSubmit2} className={classes.form} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <Field
+                    autoFocus
+                    component={RFTextField}
+                    autoComplete="fname"
+                    fullWidth
+                    label="First name"
+                    name="firstName"
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Field
+                    component={RFTextField}
+                    autoComplete="lname"
+                    fullWidth
+                    label="Last name"
+                    name="lastName"
+                    required
+                  />
+                </Grid>
+              </Grid>
               <Field
                 autoComplete="email"
-                autoFocus
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
-                label="전화번호, 사용자 이름 또는 이메일"
+                label="Email"
                 margin="normal"
                 name="email"
                 required
-                size="normal"
               />
               <Field
                 fullWidth
-                size="large"
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
                 name="password"
                 autoComplete="current-password"
-                label="비밀번호"
+                label="Password"
                 type="password"
                 margin="normal"
               />
@@ -95,24 +116,17 @@ const Login = ({history}) =>{
               <FormButton
                 className={classes.button}
                 disabled={submitting || sent}
-                size="large"
                 color="secondary"
                 fullWidth
-                onClick={() => {history.push('/main')}}
               >
-                {submitting || sent ? 'In progress…' : '로그인'}
+                {submitting || sent ? 'In progress…' : 'Sign Up'}
               </FormButton>
             </form>
           )}
         </Form>
-        <Typography align="center">
-          <Link underline="always" href="/premium-themes/onepirate/forgot-password/">
-            Forgot password?
-          </Link>
-        </Typography>
-        </AppForm>
-      </React.Fragment>
-    )
+      </AppForm>
+    </React.Fragment>
+  );
 }
 
-export default Login;
+export default SignUp;
